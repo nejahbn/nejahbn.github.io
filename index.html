@@ -1,1 +1,28 @@
-Hello World
+#!ipxe
+
+####       boot.wired.rocks initial loader        ####
+
+set conn_type https
+chain --autofree https://boot.wired.rocks/boot.ipxe || echo HTTPS failed... attempting HTTP...
+set conn_type http
+chain --autofree http://boot.wired.rocks/boot.ipxe || echo HTTP failed, localbooting...
+exit
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Weboot BootLoaders - Powered by ipxe.org</title>
+    <meta name='description' content='Download links for available WeBoot bootloaders.'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      table, th, td {
+      padding: 5px;
+      border: 1px solid black; 
+      }
+    </style>
+  </head>
+  <body>
+  <div>Weboot</div>
+  </body>
+</html>
+ 

@@ -1,0 +1,97 @@
+#!ipxe
+
+# Figure out if client is 64-bit capable
+cpuid --ext 29 && set arch x86_64 || set arch x86
+cpuid --ext 29 && set archb 64 || set archb 32
+cpuid --ext 29 && set archl x86_64 || set archl i386
+
+# Some menu defaults
+set menu-timeout 5000
+set submenu-timeout ${menu-timeout}
+isset ${menu-default} || set menu-default shell
+
+set esc:hex 1b
+set bold ${esc:string}[1m
+set orange ${esc:string}[33;0m
+set yellow ${esc:string}[33;1m
+set cyan ${esc:string}[36;1m
+set resetfg ${esc:string}[39m
+set resetbg ${esc:string}[49m
+set resetbold ${esc:string}[22m
+set reset ${esc:string}[0m
+
+# Set graphics mode and configure colours
+console --x 1024 --y 768 
+colour --basic 3 --rgb 0xffaa44 3
+#cpair --foreground 0 --background 3 2
+#cpair --foreground 3 3
+set chotkey ${bold}
+set cname ${orange}
+
+
+#================ Main Menu =================
+:start
+menu iPXE boot menu for ${manufacturer} ${product} (${archb}bit)
+item --gap -- ------------------ OPENSHIFT -------------------
+item oai1      Openshift Assisted Installer iso 
+
+item --gap -- ------------------ RHEL-------------------
+item rhel9.0      RHEL 9.0 minimal installer iso 
+
+
+item --gap -- -------------- ADVANCED OPTIONS ----------------
+item --key c config       ${chotkey}C${resetbold}onfigure settings
+item shell                Drop to iPXE shell
+item reboot               Reboot computer
+item
+item --key x exit         E${chotkey}x${resetbold}it iPXE and continue BIOS boot
+
+choose --timeout ${menu-timeout} --default ${menu-default} selected || goto cancel
+set menu-timeout 0
+goto ${selected}
+
+:cancel
+echo You cancelled the menu, dropping you to a shell
+
+:shell
+echo Type 'exit' to get back to the menu
+shell
+set menu-timeout 0
+set submenu-timeout 0
+goto start
+
+:failed
+echo Booting failed, dropping to shell
+goto shell
+
+:reboot
+reboot
+
+:exit
+exit
+
+:config
+config
+goto start
+
+:back
+set submenu-timeout 0
+clear submenu-default
+goto start
+
+
+
+
+
+#============ Main Menu Items =============
+:oai1
+kernel ${boot-url}/memdisk iso raw
+initrd ${boot-url}/iso/ocplab.iso
+boot
+
+:rhel9.0
+kernel ${boot-url}/memdisk iso raw
+initrd ${boot-url}/iso/rhel9.0-boot.iso
+boot
+
+

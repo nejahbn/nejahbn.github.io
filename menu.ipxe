@@ -86,12 +86,12 @@ goto start
 #============ Main Menu Items =============
 :oai1
 kernel ${boot-url}/memdisk iso raw
-initrd ${boot-url}/iso/ocplab.iso
+initrd ${cdn-url}/iso/ocplab.iso
 boot
 
 :rhel9.0
 kernel ${boot-url}/memdisk iso raw
-initrd ${boot-url}/iso/rhel9.0-boot.iso
+initrd ${cdn-url}/iso/rhel-9.0-boot.iso
 boot
 
 

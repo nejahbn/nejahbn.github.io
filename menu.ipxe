@@ -91,7 +91,7 @@ boot
 
 :rhel9.0
 kernel ${boot-url}memdisk iso raw
-initrd ${cdn-url}iso/rhel-9.0-boot.iso
+initrd ${cdn-url}iso/rhel9.iso
 boot
 
 

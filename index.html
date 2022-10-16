@@ -3,10 +3,7 @@
 ####       boot.wired.rocks initial loader        ####
 
 set conn_type https
-chain --autofree https://nejahbn.github.io/boot.ipxe || echo HTTPS failed... attempting HTTP...
-
-#### set conn_type http ####
-### chain --autofree http://nejahbn.github.io/boot.ipxe || echo HTTP failed, localbooting...   ####
+chain --autofree https://nejahbn.github.io/boot.ipxe || echo HTTPS failed...
 exit
 
 <!DOCTYPE html>

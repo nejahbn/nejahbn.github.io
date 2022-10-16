@@ -4,8 +4,9 @@
 
 set conn_type https
 chain --autofree https://nejahbn.github.io/boot.ipxe || echo HTTPS failed... attempting HTTP...
-set conn_type http
-chain --autofree http://nejahbn.github.io/boot.ipxe || echo HTTP failed, localbooting...
+
+### set conn_type http
+### chain --autofree http://nejahbn.github.io/boot.ipxe || echo HTTP failed, localbooting...
 exit
 
 <!DOCTYPE html>

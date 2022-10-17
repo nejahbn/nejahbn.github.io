@@ -90,9 +90,9 @@ kernel ${boot-url}memdisk iso raw
 initrd ${cdn-url}repo/ocplab.iso
 boot
 
-:rhel9.0
-kernel ${boot-url}memdisk iso raw
+:rhel9.0 
 initrd ${cdn-url}repo/rhel9.iso
+chain ${boot-url}memdisk iso raw
 boot
 
 :rhel9.00

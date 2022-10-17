@@ -37,6 +37,7 @@ item oai1      Openshift Assisted Installer iso
 
 item --gap -- ------------------ RHEL-------------------
 item rhel9.0      RHEL 9.0 minimal installer iso 
+item rhel9.00     RHEL 9.0 minimal installer iso (sanboot) 
 
 
 item --gap -- -------------- ADVANCED OPTIONS ----------------
@@ -93,5 +94,9 @@ boot
 kernel ${boot-url}memdisk iso raw
 initrd ${cdn-url}repo/rhel9.iso
 boot
+
+:rhel9.00
+sanboot ${cdn-url}repo/rhel9.iso
+
 
 
